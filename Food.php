@@ -12,7 +12,7 @@ class Food extends Product {
     }
 
     public function isAvailable() {
-        if (intval(date("m")) > 1 && intval(date("m")) < 8) {
+        if (intval(date("m")) > 1 && intval(date("m")) < 6) {
             return true;
         }
         return false;

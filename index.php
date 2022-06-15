@@ -31,40 +31,82 @@ $main_data = [
 $first_user = new User("5555-4444-3333-2222", "05/2022", "Giacomo", "Verdi", "giacomino@libero.it", true);
 var_dump($first_user);
 
-$first_user->addToCart($milk);
-$first_user->addToCart($pet_carrier);
-$first_user->addToCart($dog_defender);
+try {
+    $first_user->addToCart($milk);
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}
+try {
+    $first_user->addToCart($pet_carrier);
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}
+try {
+    $first_user->addToCart($dog_defender);
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}
+
 var_dump($first_user->cart);
-echo "Il prezzo finale per " . $first_user->name. " è: € " . $first_user->getFinalPrice();
 
 $second_user = new User("1234-5678-8765-4321", "10/2022");
 var_dump($second_user);
 
-$second_user->addToCart($milk);
-$second_user->addToCart($aquarium_rock);
-$second_user->addToCart($dog_defender);
+try {
+    $second_user->addToCart($dog_snaks);
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}
+try {
+    $second_user->addToCart($aquarium_rock);
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}
+try {
+    $second_user->addToCart($dog_defender);
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+}
+
 var_dump($second_user->cart);
-echo "Il prezzo finale per " . $second_user->name. " è: € " . $second_user->getFinalPrice();
 ?>
 
 <h2>Carrello di <?php echo $first_user->name . " " . $first_user->lastname; ?>: </h2>
 <ul>
-    <?php foreach($first_user->cart as $single_item) { ?>
+    <?php foreach ($first_user->cart as $single_item) { ?>
         <li>
             <span><?php echo $single_item->getInfo() ?></span>
         </li>
     <?php } ?>
 </ul>
 <h3>Totale da pagare: € <?php echo $first_user->getFinalPrice() ?></h3>
-<h4>Esito Pagamento: <?php $first_user->buyItems() ?></h4>
+<h4>
+    Esito Pagamento: 
+    <?php 
+        try {
+            $first_user->buyItems();
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    ?>
+</h4>
 
 <h2>Carrello di <?php echo $second_user->name . " " . $second_user->lastname; ?>: </h2>
 <ul>
-    <?php foreach($second_user->cart as $single_item) { ?>
+    <?php foreach ($second_user->cart as $single_item) { ?>
         <li>
             <span><?php echo $single_item->getInfo() ?></span>
         </li>
     <?php } ?>
 </ul>
 <h3>Totale da pagare: € <?php echo $second_user->getFinalPrice() ?></h3>
-<h4>Esito Pagamento: <?php $second_user->buyItems() ?></h4>
+<h4>
+    Esito Pagamento: 
+    <?php 
+        try {
+            $second_user->buyItems();
+        } catch (Exception $ex) {
+            echo $ex->getMessage();
+        }
+    ?>
+</h4>

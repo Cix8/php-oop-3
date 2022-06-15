@@ -32,6 +32,8 @@ class User {
     public function addToCart($item) {
         if ($item->available) {
             $this->cart[] = $item;
+        } else {
+            throw new Exception($item->brand . " " . $item->name . " non è disponibile attualmente. Riprova più tardi");
         }
     }
 
@@ -53,9 +55,8 @@ class User {
         $current_month = intval(date("m"));
         if (($card_year > $current_year) || ($card_year === $current_year && $card_month > $current_month)) {
             echo "Pagamento effettuato con successo!";
-            return true;
+        } else {
+            throw new Exception("Pagamento non riuscito, la tua carta è scaduta!");
         }
-        echo "Pagamento non riuscito, la tua carta è scaduta!";
-        return false;
     }
 }
